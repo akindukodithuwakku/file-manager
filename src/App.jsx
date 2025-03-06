@@ -10,7 +10,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Dashboard />} />
                     {/* Add more routes here as needed */}
-                    <Route path="*" element={<h2>404 Not Found</h2>} />
+                    <Route path="*" element={<h2> 404 Not Found</h2>} />
                 </Routes>
             </div>
         </Router>
