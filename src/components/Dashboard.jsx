@@ -28,25 +28,27 @@ const Dashboard = () => {
             setMessage("Please select a file before uploading.");
             return;
         }
-
+    
         const formData = new FormData();
         formData.append("file", file);
-
+        formData.append("fileName", file.name);
+    
         try {
-            const res = await axios.post("/upload", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
+            const res = await axios.post(process.env.REACT_APP_API_URL, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                withCredentials: false, // Ensure no authentication issue
             });
-
+    
             setUploadedFile(res.data);
             setMessage("File uploaded successfully!");
         } catch (err) {
-            setMessage(
-                err.response?.status === 500
-                    ? "There was a problem with the server."
-                    : err.response?.data?.msg || "An error occurred."
-            );
+            console.error(err); // Log the error for debugging
+            setMessage("Error uploading file");
         }
     };
+    
 
     return (
         <div className="container">
